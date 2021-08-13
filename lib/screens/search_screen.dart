@@ -117,8 +117,7 @@ class SearchScreen extends StatelessWidget {
                       city: resto.city!,
                       rating: resto.rating!,
                       onPressed: () {
-                        Navigator.pushNamed(
-                          context,
+                        Navigator.of(context, rootNavigator: true).pushNamed(
                           DetailScreen.routeName,
                           arguments: resto.id,
                         );

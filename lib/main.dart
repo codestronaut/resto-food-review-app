@@ -9,6 +9,7 @@ import 'package:resto/providers/resto_review_provider.dart';
 import 'package:resto/providers/resto_search_provider.dart';
 import 'package:resto/routes.dart';
 import 'package:resto/screens/home_screen.dart';
+import 'package:resto/screens/list_screen.dart';
 
 void main() {
   runApp(
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      initialRoute: HomeScreen.routeName,
+      initialRoute: ListScreen.routeName,
       routes: allRoute(context),
     );
   }
