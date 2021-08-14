@@ -40,17 +40,27 @@ class ListScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             itemBuilder: (context, index) {
               final resto = state.restos!.items![index];
-              return ItemList(
-                image: UrlList.imageUrl + resto.pictureId!,
-                title: resto.name!,
-                city: resto.city!,
-                rating: resto.rating!,
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed(
-                    DetailScreen.routeName,
-                    arguments: resto.id,
+              return TweenAnimationBuilder(
+                tween: Tween<double>(begin: 0, end: 1),
+                duration: Duration(milliseconds: 500),
+                builder: (BuildContext context, double val, Widget? child) {
+                  return Opacity(
+                    opacity: val,
+                    child: child,
                   );
                 },
+                child: ItemList(
+                  image: UrlList.imageUrl + resto.pictureId!,
+                  title: resto.name!,
+                  city: resto.city!,
+                  rating: resto.rating!,
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pushNamed(
+                      DetailScreen.routeName,
+                      arguments: resto.id,
+                    );
+                  },
+                ),
               );
             },
           );

@@ -29,99 +29,112 @@ class DetailScreen extends StatelessWidget {
     required String description,
   }) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            name,
-            style: GoogleFonts.poppins(
-              fontSize: 22.0,
-              fontWeight: FontWeight.w500,
+      child: TweenAnimationBuilder(
+        tween: Tween<double>(begin: 0.1, end: 1),
+        duration: Duration(milliseconds: 300),
+        builder: (BuildContext context, double val, Widget? child) {
+          return Opacity(
+            opacity: val,
+            child: Padding(
+              padding: EdgeInsets.only(top: 16.0 / val),
+              child: child,
             ),
-          ),
-          SizedBox(height: 4.0),
-          Row(
-            children: [
-              Icon(
-                defaultTargetPlatform == TargetPlatform.android
-                    ? Icons.store_outlined
-                    : CupertinoIcons.map,
-                color: Colors.grey[700],
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              name,
+              style: GoogleFonts.poppins(
+                fontSize: 22.0,
+                fontWeight: FontWeight.w500,
               ),
-              SizedBox(width: 8.0),
-              Text(
-                '$address, $city',
-                style: GoogleFonts.poppins(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w400,
+            ),
+            SizedBox(height: 4.0),
+            Row(
+              children: [
+                Icon(
+                  defaultTargetPlatform == TargetPlatform.android
+                      ? Icons.store_outlined
+                      : CupertinoIcons.map,
                   color: Colors.grey[700],
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8.0),
-          Row(
-            children: [
-              for (var category in catrgories)
-                Container(
-                  margin: EdgeInsets.only(right: 8.0),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.0,
-                    vertical: 4.0,
+                SizedBox(width: 8.0),
+                Text(
+                  '$address, $city',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey[700],
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.blueGrey[50],
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Text(
-                    category.name!,
-                    style: GoogleFonts.poppins(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w400,
+                ),
+              ],
+            ),
+            SizedBox(height: 8.0),
+            Row(
+              children: [
+                for (var category in catrgories)
+                  Container(
+                    margin: EdgeInsets.only(right: 8.0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 4.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.blueGrey[50],
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Text(
+                      category.name!,
+                      style: GoogleFonts.poppins(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
+              ],
+            ),
+            SizedBox(height: 16.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Deskripsi',
+                  style: GoogleFonts.poppins(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[700],
+                  ),
                 ),
-            ],
-          ),
-          SizedBox(height: 16.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Deskripsi',
-                style: GoogleFonts.poppins(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[700],
+                SizedBox(height: 8.0),
+                ReadMoreText(
+                  description,
+                  trimLines: 2,
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  trimCollapsedText: 'Lihat semua',
+                  trimExpandedText: 'Lihat sebagian',
+                  moreStyle: GoogleFonts.poppins(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.amber[700],
+                  ),
+                  lessStyle: GoogleFonts.poppins(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.amber[700],
+                  ),
                 ),
-              ),
-              SizedBox(height: 8.0),
-              ReadMoreText(
-                description,
-                trimLines: 2,
-                textAlign: TextAlign.justify,
-                style: GoogleFonts.poppins(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w400,
-                ),
-                trimCollapsedText: 'Lihat semua',
-                trimExpandedText: 'Lihat sebagian',
-                moreStyle: GoogleFonts.poppins(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.amber[700],
-                ),
-                lessStyle: GoogleFonts.poppins(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.amber[700],
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -134,48 +147,58 @@ class DetailScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: GoogleFonts.poppins(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[700],
+      child: TweenAnimationBuilder(
+        tween: Tween<double>(begin: 0.1, end: 1),
+        duration: Duration(milliseconds: 300),
+        builder: (BuildContext context, double val, Widget? child) {
+          return Opacity(
+            opacity: val,
+            child: child,
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: GoogleFonts.poppins(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[700],
+              ),
             ),
-          ),
-          SizedBox(width: 8.0),
-          Column(
-            children: [
-              for (var item in menus)
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 48.0,
-                        width: 48.0,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey[50],
-                          borderRadius: BorderRadius.circular(8.0),
+            SizedBox(width: 8.0),
+            Column(
+              children: [
+                for (var item in menus)
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 48.0,
+                          width: 48.0,
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey[50],
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: icon,
                         ),
-                        child: icon,
-                      ),
-                      SizedBox(width: 16.0),
-                      Text(
-                        item.name!,
-                        style: GoogleFonts.poppins(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
+                        SizedBox(width: 16.0),
+                        Text(
+                          item.name!,
+                          style: GoogleFonts.poppins(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -188,165 +211,175 @@ class DetailScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Rating Keseluruhan',
-            style: GoogleFonts.poppins(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[700],
+      child: TweenAnimationBuilder(
+        tween: Tween<double>(begin: 0.1, end: 1),
+        duration: Duration(milliseconds: 300),
+        builder: (BuildContext context, double val, Widget? child) {
+          return Opacity(
+            opacity: val,
+            child: child,
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Rating Keseluruhan',
+              style: GoogleFonts.poppins(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[700],
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              bottom: 16.0,
-              top: 8.0,
-            ),
-            child: Row(
-              children: [
-                Text(
-                  '$rating / 5.0',
-                  style: GoogleFonts.poppins(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
+            Container(
+              margin: EdgeInsets.only(
+                bottom: 16.0,
+                top: 8.0,
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    '$rating / 5.0',
+                    style: GoogleFonts.poppins(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                SizedBox(width: 8.0),
-                RatingBar.builder(
-                  initialRating: rating,
-                  allowHalfRating: true,
-                  ignoreGestures: true,
-                  minRating: 1,
-                  maxRating: 5,
-                  itemCount: 5,
-                  itemSize: 20.0,
-                  itemBuilder: (context, _) => Icon(
-                    Icons.star,
-                    color: Colors.amber,
+                  SizedBox(width: 8.0),
+                  RatingBar.builder(
+                    initialRating: rating,
+                    allowHalfRating: true,
+                    ignoreGestures: true,
+                    minRating: 1,
+                    maxRating: 5,
+                    itemCount: 5,
+                    itemSize: 20.0,
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (rating) {},
                   ),
-                  onRatingUpdate: (rating) {},
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Text(
-            'Apa Kata Mereka',
-            style: GoogleFonts.poppins(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[700],
+            Text(
+              'Apa Kata Mereka',
+              style: GoogleFonts.poppins(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[700],
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              bottom: 16.0,
-              top: 8.0,
-            ),
-            child: Column(
-              children: [
-                for (var review in reviews)
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            height: 64.0,
-                            width: 56.0,
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey[50],
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Icon(
-                              Icons.person_outline,
-                              color: Colors.grey[700],
+            Container(
+              margin: EdgeInsets.only(
+                bottom: 16.0,
+                top: 8.0,
+              ),
+              child: Column(
+                children: [
+                  for (var review in reviews)
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 64.0,
+                              width: 56.0,
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey[50],
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Icon(
+                                Icons.person_outline,
+                                color: Colors.grey[700],
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 16.0),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                review.name!,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w400,
+                          SizedBox(width: 16.0),
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  review.name!,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                review.date!,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey[700],
+                                Text(
+                                  review.date!,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey[700],
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                review.review!,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w400,
+                                Text(
+                                  review.review!,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: defaultTargetPlatform == TargetPlatform.android
-                ? ElevatedButton(
-                    child: Text(
-                      'Tulis Review',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: defaultTargetPlatform == TargetPlatform.android
+                  ? ElevatedButton(
+                      child: Text(
+                        'Tulis Review',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                        ),
                       ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 14.0,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          ReviewScreen.routeName,
+                          arguments: id,
+                        );
+                      },
+                    )
+                  : CupertinoButton.filled(
+                      child: Text('Tulis Review'),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          ReviewScreen.routeName,
+                          arguments: id,
+                        );
+                      },
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 14.0,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        ReviewScreen.routeName,
-                        arguments: id,
-                      );
-                    },
-                  )
-                : CupertinoButton.filled(
-                    child: Text('Tulis Review'),
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        ReviewScreen.routeName,
-                        arguments: id,
-                      );
-                    },
-                  ),
-          ),
-          SizedBox(height: 24.0),
-        ],
+            ),
+            SizedBox(height: 24.0),
+          ],
+        ),
       ),
     );
   }
@@ -371,11 +404,14 @@ class DetailScreen extends StatelessWidget {
             child: Container(
               child: Column(
                 children: [
-                  FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: '${UrlList.largeImageUrl}${resto!.pictureId}',
-                    height: 300.0,
-                    fit: BoxFit.cover,
+                  Hero(
+                    tag: '${UrlList.imageUrl}${resto!.pictureId}',
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: '${UrlList.largeImageUrl}${resto.pictureId}',
+                      height: 300.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   _buildGeneralInfoWidget(
                     name: resto.name!,

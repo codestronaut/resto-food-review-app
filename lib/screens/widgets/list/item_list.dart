@@ -37,14 +37,17 @@ class ItemList extends StatelessWidget {
             ),
             child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: image,
-                    height: 72.0,
-                    width: 72.0,
-                    fit: BoxFit.cover,
+                Hero(
+                  tag: '$image',
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: image,
+                      height: 72.0,
+                      width: 72.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Container(
