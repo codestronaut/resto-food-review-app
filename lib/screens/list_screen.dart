@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:resto/providers/resto_list_provider.dart';
 import 'package:resto/screens/detail_screen.dart';
-import 'package:resto/screens/search_screen.dart';
 import 'package:resto/screens/widgets/alert/alert_animation_widget.dart';
 import 'package:resto/screens/widgets/builder/build_widget.dart';
 import 'package:resto/screens/widgets/list/item_list.dart';
@@ -34,35 +33,37 @@ class ListScreen extends StatelessWidget {
             },
           );
         } else if (state.state == FetchResultState.HasData) {
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: state.restos!.items!.length,
-            padding: EdgeInsets.all(16.0),
-            itemBuilder: (context, index) {
-              final resto = state.restos!.items![index];
-              return TweenAnimationBuilder(
-                tween: Tween<double>(begin: 0, end: 1),
-                duration: Duration(milliseconds: 500),
-                builder: (BuildContext context, double val, Widget? child) {
-                  return Opacity(
-                    opacity: val,
-                    child: child,
-                  );
-                },
-                child: ItemList(
-                  image: UrlList.imageUrl + resto.pictureId!,
-                  title: resto.name!,
-                  city: resto.city!,
-                  rating: resto.rating!,
-                  onPressed: () {
-                    Navigator.of(context, rootNavigator: true).pushNamed(
-                      DetailScreen.routeName,
-                      arguments: resto.id,
+          return SafeArea(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: state.restos!.items!.length,
+              padding: EdgeInsets.all(16.0),
+              itemBuilder: (context, index) {
+                final resto = state.restos!.items![index];
+                return TweenAnimationBuilder(
+                  tween: Tween<double>(begin: 0, end: 1),
+                  duration: Duration(milliseconds: 500),
+                  builder: (BuildContext context, double val, Widget? child) {
+                    return Opacity(
+                      opacity: val,
+                      child: child,
                     );
                   },
-                ),
-              );
-            },
+                  child: ItemList(
+                    image: UrlList.imageUrl + resto.pictureId!,
+                    title: resto.name!,
+                    city: resto.city!,
+                    rating: resto.rating!,
+                    onPressed: () {
+                      Navigator.of(context, rootNavigator: true).pushNamed(
+                        DetailScreen.routeName,
+                        arguments: resto.id,
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
           );
         } else if (state.state == FetchResultState.NoData) {
           return AlertAnimationWidget(

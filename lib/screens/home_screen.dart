@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
+import 'package:resto/providers/preferences_provider.dart';
 import 'package:resto/screens/favorite_screen.dart';
 import 'package:resto/screens/list_screen.dart';
 import 'package:resto/screens/search_screen.dart';
@@ -52,29 +54,31 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItem(),
-      confineInSafeArea: true,
-      backgroundColor: Colors.white,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: false,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: false,
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-      ),
-      screenTransitionAnimation: ScreenTransitionAnimation(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-        animateTabTransition: true,
-      ),
-      navBarStyle: NavBarStyle.style1,
-    );
+    return Consumer<PreferencesProvider>(builder: (context, provider, child) {
+      return PersistentTabView(
+        context,
+        controller: _controller,
+        screens: _buildScreens(),
+        items: _navBarsItem(),
+        confineInSafeArea: true,
+        backgroundColor: provider.isDarkTheme ? Colors.black : Colors.white,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: false,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardShows: false,
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: ItemAnimationProperties(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: ScreenTransitionAnimation(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+          animateTabTransition: true,
+        ),
+        navBarStyle: NavBarStyle.style1,
+      );
+    });
   }
 }

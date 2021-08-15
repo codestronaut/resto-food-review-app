@@ -12,23 +12,9 @@ class BuildWidget {
     List<Widget>? appBarActions,
     required Widget body,
   }) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-    ));
     return Scaffold(
-      backgroundColor: ColorPalette.backgroundColor,
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: appBarElevation != null ? appBarElevation : 0.0,
-        shadowColor: Colors.grey[200],
-        title: Text(
-          appBarTitle,
-          style: GoogleFonts.poppins(
-            color: Colors.black,
-          ),
-        ),
-        actions: appBarActions,
+        title: Text(appBarTitle),
       ),
       body: body,
     );
@@ -43,23 +29,10 @@ class BuildWidget {
     bool? hasBorder = false,
   }) {
     return CupertinoPageScaffold(
-      backgroundColor: ColorPalette.backgroundColor,
-      resizeToAvoidBottomInset: false,
       navigationBar: CupertinoNavigationBar(
-        border: Border.all(
-          width: 0.0,
-          color: hasBorder == true ? Color(0x4D000000) : Colors.transparent,
-        ),
-        backgroundColor: Colors.white,
         previousPageTitle: prevPageTitle,
-        middle: Text(
-          navBarTitle,
-          style: GoogleFonts.poppins(
-            color: Colors.black,
-          ),
-        ),
+        middle: Text(navBarTitle),
         transitionBetweenRoutes: false,
-        trailing: navBarTrailing,
       ),
       child: body,
     );

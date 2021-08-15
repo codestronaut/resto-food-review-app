@@ -543,13 +543,13 @@ class DetailScreen extends StatelessWidget {
         context: context,
         appBarTitle: 'Detail',
         appBarElevation: 2.0,
-        body: _buildContent(context),
+        body: SafeArea(child: _buildContent(context)),
       ),
       iosBuilder: (context) => BuildWidget.iOS(
         context: context,
         prevPageTitle: 'Home',
         navBarTitle: 'Detail',
-        body: _buildContent(context),
+        body: SafeArea(child: _buildContent(context)),
       ),
     );
   }
