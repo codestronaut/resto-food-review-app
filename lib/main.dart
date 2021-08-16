@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:resto/data/api/api_service.dart';
@@ -66,44 +65,4 @@ void main() {
       ),
     ),
   );
-}
-
-class MyApp extends StatelessWidget {
-  MaterialApp _buildAndroidParent(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-      ),
-      initialRoute: HomeScreen.routeName,
-      routes: allRoute(context),
-    );
-  }
-
-  CupertinoApp _buildIOSParent(BuildContext context) {
-    return CupertinoApp(
-      debugShowCheckedModeBanner: false,
-      theme: CupertinoThemeData(
-        primaryColor: Colors.black,
-      ),
-      initialRoute: HomeScreen.routeName,
-      routes: allRoute(context),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
-        return _buildAndroidParent(context);
-      case TargetPlatform.iOS:
-        return _buildIOSParent(context);
-      default:
-        return _buildAndroidParent(context);
-    }
-  }
 }
