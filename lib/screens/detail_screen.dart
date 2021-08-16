@@ -7,12 +7,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:resto/data/models/resto.dart';
-import 'package:resto/providers/resto_detail_provider.dart';
+import 'package:resto/providers/content/resto_detail_provider.dart';
 import 'package:resto/screens/review_screen.dart';
 import 'package:resto/screens/widgets/alert/alert_animation_widget.dart';
 import 'package:resto/screens/widgets/builder/build_widget.dart';
 import 'package:resto/screens/widgets/builder/platform_widget.dart';
 import 'package:resto/shared/constants.dart';
+import 'package:resto/shared/styles.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -385,7 +386,7 @@ class DetailScreen extends StatelessWidget {
                     description: resto.description!,
                   ),
                   Divider(
-                    color: ColorPalette.backgroundColor,
+                    color: backgroundColor,
                     height: 8.0,
                   ),
                   _buildMenuListWidget(
@@ -397,7 +398,7 @@ class DetailScreen extends StatelessWidget {
                     menus: resto.menus!.foods!,
                   ),
                   Divider(
-                    color: ColorPalette.backgroundColor,
+                    color: backgroundColor,
                     height: 8.0,
                   ),
                   _buildMenuListWidget(
@@ -409,7 +410,7 @@ class DetailScreen extends StatelessWidget {
                     menus: resto.menus!.drinks!,
                   ),
                   Divider(
-                    color: ColorPalette.backgroundColor,
+                    color: backgroundColor,
                     height: 8.0,
                   ),
                   _buildReviewWidget(
