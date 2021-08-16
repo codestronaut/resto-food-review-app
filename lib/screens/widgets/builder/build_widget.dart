@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:resto/shared/constants.dart';
+import 'package:resto/shared/styles.dart';
 
 class BuildWidget {
   static Widget android({
@@ -16,7 +16,7 @@ class BuildWidget {
       statusBarColor: Colors.white,
     ));
     return Scaffold(
-      backgroundColor: ColorPalette.backgroundColor,
+      backgroundColor: backgroundColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -43,7 +43,7 @@ class BuildWidget {
     bool? hasBorder = false,
   }) {
     return CupertinoPageScaffold(
-      backgroundColor: ColorPalette.backgroundColor,
+      backgroundColor: backgroundColor,
       resizeToAvoidBottomInset: false,
       navigationBar: CupertinoNavigationBar(
         border: Border.all(
